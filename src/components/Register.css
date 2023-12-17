@@ -1,0 +1,50 @@
+:root {
+    --primary-color: #3498db; /* Primary color (header background) */
+    --text-color: #ecf0f1; /* Text color */
+   
+  }
+  
+  body {
+    background-color: #ecf0f1; /* Body background color */
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  h2 {
+    color: var(--primary-color);
+    text-align: center;
+  }
+  
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+  }
+  
