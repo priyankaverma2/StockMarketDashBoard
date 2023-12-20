@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes , Navigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard/Dashboard';
-import Settings from './components/Settings/Settings';
 import Header from './components/Header';
+import StockChart from './components/Dashboard/StockChart';
+import SavedtoFav from './components/Dashboard/SavedtoFav';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
- 
   const handleLogin = () => {
     setLoggedIn(true);
   };
@@ -17,9 +17,9 @@ const App = () => {
   const handleLogout = () => {
 
     setLoggedIn(false);
-  
+
   };
- 
+   
   return (
     <Router>
       <div>
@@ -32,15 +32,20 @@ const App = () => {
           />
           <Route
             path="/register"
-            element={<Register  />}
+            element={<Register />}
           />
           <Route
             path="/dashboard"
             element={isLoggedIn ? <Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/login" />}
           />
+          <Route
+         
+            path="/saved"
+            element={isLoggedIn ? <SavedtoFav  isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/login" />}
+          />
            <Route
-            path="/settings"
-            element={isLoggedIn ? <Settings isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/login" />}
+            path="/chart/:symbol"
+            element={isLoggedIn ? <StockChart /> : <Navigate to="/login" />}
           />
         </Routes>
       </div>

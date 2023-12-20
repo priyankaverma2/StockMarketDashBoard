@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import stockService from '../../services/stockService';
+import React, { useState } from 'react';
+import StockList from './StockList';
+import './Dashboard.css';
 
 const Dashboard = () => {
-  const [stockData, setStockData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterActive, setFilterActive] = useState(false);
 
-  useEffect(() => {
-    // Example: Fetching stock data for symbol 'AAPL'
-    const fetchStockData = async () => {
-      try {
-        const data = await stockService.getStockData('AAPL');
-        setStockData(data);
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-        // Log the fetched data to the console
-        console.log('Fetched Stock Data:', data);
-      } catch (error) {
-        console.error('Error fetching stock data:', error);
-      }
-    };
-
-    fetchStockData();
-  }, []); // Run once on component mount
-
+  const handleFilterToggle = () => {
+    setFilterActive((prevFilter) => !prevFilter);
+  };
+  
   return (
-    <div>
-      <h2>Dashboard</h2>
-      {stockData && (
-        <div>
-          <p>Symbol: {stockData.symbol}</p>
-          <p>Last Price: {stockData.latestPrice}</p>
-          {/* Add more stock data as needed */}
-        </div>
-      )}
+    <div className="dashboard-container">
+      <h1 className="dashboard-title">Explore</h1>
+
+      <div className="dashboard-search">
+        <input
+          type="text"
+          placeholder="Search stocks..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="dashboard-search-input"
+        />
+        <button onClick={handleFilterToggle} className="dashboard-filter-button">
+          {filterActive ? 'Reset' : 'Filter'}
+        </button>
+      </div>
+
+      <StockList searchQuery={searchQuery} filterActive={filterActive}  />
     </div>
   );
 };

@@ -1,5 +1,7 @@
+// Register.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Register.css';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -9,62 +11,91 @@ const Register = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!name || !email || !username || !password) {
       setError('All fields are required');
       return;
     }
-    console.log('Registered with:', { name, email, username, password });
-    navigate('/login');
+  
+    const user = {
+      name,
+      email,
+      id: username, // Assuming you want to use the username as the id
+      password,
+    };
+  
+    try {
+      const postResponse = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+  
+      if (postResponse.ok) {
+        console.log('User data saved to users');
+        navigate('/login');
+      } else {
+        console.error('Failed to add to users', postResponse.statusText);
+      }
+    } catch (error) {
+      console.error('Error posting user data:', error);
+    }
   };
+  
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form>
+    <div className="register-container">
+      <h2>Sign Up</h2>
+      <form className="register-form">
         <label>
-          Name:
+          
           <input
             type="text"
             value={name}
-            placeholder='First Name'
+            placeholder="Enter your name"
             onChange={(e) => setName(e.target.value)}
             required
+            className="register-input"
           />
         </label>
         <label>
-          Email:
+          
           <input
             type="email"
             value={email}
-            placeholder='email'
+            placeholder="Enter your email"
             onChange={(e) => setEmail(e.target.value)}
             required
+            className="register-input"
           />
         </label>
         <label>
-          Username:
+          
           <input
             type="text"
             value={username}
-            placeholder='username'
+            placeholder="Choose a username"
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="register-input"
           />
         </label>
         <label>
-          Password:
+          
           <input
             type="password"
             value={password}
-            placeholder='password'
+            placeholder="Create a password"
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="register-input"
           />
         </label>
-        <p style={{ color: 'red' }}>{error}</p>
-        <button type="button" onClick={handleRegister}>
-          Register
+        <p className="error-message">{error}</p>
+        <button type="button" onClick={handleRegister} className="register-button">
+        Sign Up
         </button>
       </form>
     </div>

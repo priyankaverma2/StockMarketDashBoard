@@ -12,23 +12,23 @@ const Header = ({ isLoggedIn, onLogout }) => {
                     {isLoggedIn ? (
                         <>
                             <li>
-                                <Link to="/dashboard">Dashboard</Link>
+                                <Link to="/dashboard">Home</Link>
                             </li>
                             <li>
-                                <Link to="/settings">Settings</Link>
+                                <Link to="/saved">Saved</Link>
                             </li>
                             <li>
-                                <button onClick={onLogout}>Logout</button>
+                                <button onClick={onLogout}>SignOut</button>
                             </li>
 
                         </>
                     ) : (
                         <>
                         <li>
-                            <Link to="/login">Login</Link>
+                            <Link to="/login">Sign In</Link>
                         </li>
                           <li>
-                          <Link to="/register">Register</Link>
+                          <Link to="/register">Sign Up</Link>
                       </li>
                       </>
                     )}

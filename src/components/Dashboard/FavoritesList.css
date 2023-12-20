@@ -1,0 +1,30 @@
+.favorites-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .favorites-list {
+    display: flex;
+  flex-direction: column; 
+  gap: 5px;
+  }
+  
+  .favorites-list h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+ 
+  @media screen and (max-width: 768px) {
+    .stock-list-container {
+      padding: 5px;
+    }
+  
+    .stock-list-link {
+      font-size: 16px;
+    }
+  }

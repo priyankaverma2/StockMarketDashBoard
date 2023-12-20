@@ -1,50 +1,60 @@
-:root {
-    --primary-color: #3498db; /* Primary color (header background) */
-    --text-color: #ecf0f1; /* Text color */
-   
+/* Register.css */
+
+.register-container {
+  text-align: center;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-input {
+  margin: 10px 5px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(100% - 20px); /* Adjusted width with padding */
+  box-sizing: border-box; /* Added box-sizing property */
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.register-button {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.register-button:hover {
+  background-color: #3498db;
+}
+
+@media screen and (max-width: 480px) {
+  .register-container {
+    width: 90%;
+    padding: 15px;
   }
-  
-  body {
-    background-color: #ecf0f1; /* Body background color */
-    color: var(--text-color);
-    font-family: 'Arial', sans-serif;
+
+  .register-input,
+  .register-button {
+    font-size: 14px;
   }
-  
-  h2 {
-    color: var(--primary-color);
-    text-align: center;
-  }
-  
-  form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #2980b9; /* Darker shade on hover */
-  }
-  
+}

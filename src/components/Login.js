@@ -1,52 +1,72 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+// Login.js
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
+
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/users');
+        if (!response.ok) {
+          throw new Error('Failed to fetch users');
+        }
+
+        const usersData = await response.json();
+        setUsers(usersData);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleLogin = () => {
-    // Perform authentication logic (replace with actual authentication)
-    const isValidCredentials = username === 'p' && password === 'p';
-
-    if (isValidCredentials) {
-      onLogin(); // Update the isLoggedIn state in App.js
-      navigate('/dashboard'); // Redirect to the dashboard using useNavigate
-    } else {
-      // Display an error message or handle authentication failure
-      setError('Invalid credentials');
-    }
+    const user = users.find(u => u.id === username && u.password === password);
+  if (user) {
+    onLogin();
+    navigate('/dashboard');
+  } else {
+    setError('Invalid credentials');
+  }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form>
+    <div className="login-container">
+      <h2>Sign In</h2>
+      <form className="login-form">
         <label>
-          Username:
+          
           <input
             type="text"
             value={username}
-            placeholder='username'
+            placeholder="Enter your username"
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="login-input"
           />
         </label>
         <label>
-          Password:
+          
           <input
             type="password"
             value={password}
-            placeholder='password'
+            placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="login-input"
           />
         </label>
-        <p style={{ color: 'red' }}>{error}</p>
-        <button type="button" onClick={handleLogin}>
-          Login
+        <p className="error-message">{error}</p>
+        <button type="button" onClick={handleLogin} className="login-button">
+        Sign In
         </button>
       </form>
     </div>

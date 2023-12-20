@@ -1,0 +1,42 @@
+/* src/components/StockChart.css */
+
+.stock-chart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+  }
+  
+  .stock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .company-name,
+  .latest-price,
+  .avg-volume,
+  .market-cap {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .param-selector-label {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  
+  .param-selector {
+    padding: 8px;
+    font-size: 16px;
+    max-width: 200px;
+  }
+  
+  /*  */
+  
+  /* Highlighted style for selected parameter */
+  .param-selector option:checked {
+    background-color: #4caf50; /* Green */
+    color: white;
+  }
+  
