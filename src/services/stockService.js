@@ -1,4 +1,4 @@
-const API_KEY = 'pk_19114b1b99eb4341b66a18b9085aad05'; // Replace with API key
+const API_KEY = 'pk_fff3c5403d6742bfb249dbf6295d5fa7'; // Replace with API key
 
 const getStockSymbols = async () => {
   try {

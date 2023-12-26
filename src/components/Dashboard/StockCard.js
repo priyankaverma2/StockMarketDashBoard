@@ -6,13 +6,16 @@ import './StockCard.css'; // Import your CSS file
 import Loader from './Loader';
 
 
+
 const StockCard = ({ symbol, onSave, onDelete }) => {
+ 
   const [stockData, setStockData] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const fetchDataForSymbol = async () => {
       try {
+         
         const data = await stockService.getStockDataBySymbol(symbol);
         setStockData(data);
       } catch (error) {
@@ -25,8 +28,7 @@ const StockCard = ({ symbol, onSave, onDelete }) => {
 
   const getLatestPriceColor = () => {
     if (stockData) {
-      const latestPrice = stockData.latestPrice;
-      return latestPrice > 0 ? 'green' : latestPrice < 0 ? 'red' : 'black';
+      return '#00ab41';
     }
     return 'black';
   };
@@ -44,6 +46,7 @@ const StockCard = ({ symbol, onSave, onDelete }) => {
   };
 
   return (
+    
     <div className="stock-card">
   {stockData ? (
     <Link to={`/chart/${symbol}`} className="stock-link">

@@ -1,36 +1,19 @@
 // Login.js
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { useTheme } from './ThemeContext';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/users');
-        if (!response.ok) {
-          throw new Error('Failed to fetch users');
-        }
-
-        const usersData = await response.json();
-        setUsers(usersData);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const { themeStyles } = useTheme();
 
   const handleLogin = () => {
-    const user = users.find(u => u.id === username && u.password === password);
-  if (user) {
+    
+  if (username==='a'&& password==='a') {
     onLogin();
     navigate('/dashboard');
   } else {
@@ -39,8 +22,9 @@ const Login = ({ onLogin }) => {
   };
 
   return (
+    <div className='login-entire'  style={themeStyles}>
     <div className="login-container">
-      <h2>Sign In</h2>
+      <h2>Login</h2>
       <form className="login-form">
         <label>
           
@@ -69,6 +53,7 @@ const Login = ({ onLogin }) => {
         Sign In
         </button>
       </form>
+    </div>
     </div>
   );
 };

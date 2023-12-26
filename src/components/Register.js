@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
+import { useTheme } from './ThemeContext';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,7 +11,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
+  const { themeStyles } = useTheme();
   const handleRegister = async () => {
     if (!name || !email || !username || !password) {
       setError('All fields are required');
@@ -20,34 +21,19 @@ const Register = () => {
     const user = {
       name,
       email,
-      id: username, // Assuming you want to use the username as the id
-      password,
+      username,
+      password
     };
-  
-    try {
-      const postResponse = await fetch('http://localhost:3001/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      });
-  
-      if (postResponse.ok) {
-        console.log('User data saved to users');
-        navigate('/login');
-      } else {
-        console.error('Failed to add to users', postResponse.statusText);
-      }
-    } catch (error) {
-      console.error('Error posting user data:', error);
-    }
+    console.log(user+"registered")
+        navigate('/');
+    
   };
   
 
   return (
+    <div className='regsiter-entire'  style={themeStyles}>
     <div className="register-container">
-      <h2>Sign Up</h2>
+      <h2>SignUp</h2>
       <form className="register-form">
         <label>
           
@@ -98,6 +84,7 @@ const Register = () => {
         Sign Up
         </button>
       </form>
+    </div>
     </div>
   );
 };

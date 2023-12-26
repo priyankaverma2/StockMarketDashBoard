@@ -1,0 +1,30 @@
+/* NotificationsDialog.css */
+.notifications-dialog {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    width: 40%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(215, 205, 224);
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+  }
+  
+  .notifications-dialog ul {
+    list-style: square;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .notifications-dialog li {
+    margin-bottom: 5px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .notifications-dialog {
+      width: 80%;
+    }
+  }
+  

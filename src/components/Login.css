@@ -1,18 +1,19 @@
 /* Login.css */
-
+.login-entire{
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 50px;
+  height: calc(100vh - 70px);
+}
 .login-container {
-  align-items: center;
   text-align: center;
   max-width: 400px;
-  margin: 50px auto;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff;
+  color: var(--text-color);
+  background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column; /* Make the container a flex container with column direction */
-  align-items: center; /* Center children horizontally */
-  justify-content: center;
 }
 
 .login-form {
@@ -21,12 +22,14 @@
 }
 
 .login-input {
-  margin: 10px 0;
+  margin: 10px 5px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin-left: 5px;
+  width: calc(100% - 20px); /* Adjusted width with padding */
+  box-sizing: border-box; /* Added box-sizing property */
+
 }
 
 .error-message {

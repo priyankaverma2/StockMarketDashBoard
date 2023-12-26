@@ -1,14 +1,13 @@
-import FavoritesList from './FavoritesList';
 
-function SavedtoFav() {
 
-  return (
-    <>
-    <div>
-      <FavoritesList />
-      </div>
-    </>
-  );
-}
+// import FavoritesList from './FavoritesList';
+// import './SavedtoFav.css'
+// function SavedtoFav() {
 
-export default SavedtoFav;
+
+//   return (
+//       <FavoritesList />
+//   );
+// }
+
+// export default SavedtoFav;

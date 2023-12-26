@@ -6,9 +6,13 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard/Dashboard';
 import Header from './components/Header';
 import StockChart from './components/Dashboard/StockChart';
-import SavedtoFav from './components/Dashboard/SavedtoFav';
+import { Provider } from 'react-redux';
+import store from './components/redux/store';
+import { ThemeProvider } from './components/ThemeContext';
+import FavoritesList from './components/Dashboard/FavoritesList';
 
 const App = () => {
+ 
   const [isLoggedIn, setLoggedIn] = useState(false);
   const handleLogin = () => {
     setLoggedIn(true);
@@ -21,13 +25,16 @@ const App = () => {
   };
    
   return (
+    <ThemeProvider>
+    <Provider store={store}>
+     
     <Router>
-      <div>
+      <div >
         <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
 
         <Routes>
           <Route
-            path="/login"
+            path="/"
             element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />}
           />
           <Route
@@ -36,20 +43,23 @@ const App = () => {
           />
           <Route
             path="/dashboard"
-            element={isLoggedIn ? <Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <Dashboard isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/" />}
           />
           <Route
          
             path="/saved"
-            element={isLoggedIn ? <SavedtoFav  isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <FavoritesList  isLoggedIn={isLoggedIn} onLogout={handleLogout} /> : <Navigate to="/" />}
           />
            <Route
             path="/chart/:symbol"
-            element={isLoggedIn ? <StockChart /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <StockChart /> : <Navigate to="/" />}
           />
         </Routes>
       </div>
     </Router>
+    
+    </Provider>
+    </ThemeProvider>
   );
 };
 

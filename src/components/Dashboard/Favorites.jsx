@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import './Favorites.css'; 
+import './Favorites.css';
 import { Link } from 'react-router-dom';
 import stockService from '../../services/stockService';
 import Loader from './Loader';
-
+import { useTheme } from '../ThemeContext';
 
 const Favorites = ({ symbol, onDelete }) => {
   const [stockData, setStockData] = useState(null);
+
+  const { themeStyles } = useTheme();
+
   const getLatestPriceColor = () => {
     if (stockData) {
-      const latestPrice = stockData.latestPrice;
-      return latestPrice > 0 ? 'green' : latestPrice < 0 ? 'red' : 'black';
+      return '#00ab41';
     }
     return 'black';
   };
@@ -27,23 +29,25 @@ const Favorites = ({ symbol, onDelete }) => {
     fetchDataForSymbol();
   }, [symbol]);
 
-   return (
-    <div className="stock-card">
-       {stockData ? (
-    <Link to={`/chart/${symbol}`} className="stock-link">
-      {symbol}{'     '}
-      <span style={{ color: getLatestPriceColor() }}>${stockData.latestPrice}</span>
-      <p>{stockData.companyName}</p>
-    </Link>
-  ) : (
-    <Loader/>
-  )}
+  return (
+
+    <div className="stock-card" style={themeStyles}>
+      {stockData ? (
+        <Link to={`/chart/${symbol}`} className="stock-link">
+          {symbol}{'     '}
+          <span style={{ color: getLatestPriceColor() }}>${stockData.latestPrice}</span>
+          <p>{stockData.companyName}</p>
+        </Link>
+      ) : (
+        <Loader />
+      )}
       <div className="stock-buttons">
-      <button className="delete-button" onClick={() => onDelete(symbol)}>
+        <button className="delete-button" onClick={() => onDelete(symbol)}>
           Delete
         </button>
       </div>
     </div>
+
   );
 };
 

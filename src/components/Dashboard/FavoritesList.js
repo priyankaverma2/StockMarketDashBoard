@@ -1,46 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import stockService from '../../services/stockService';
 import Favorites from './Favorites';
 import './FavoritesList.css';
+import { removeFromFavorites } from '../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from '../ThemeContext';
 
 const FavoritesList = () => {
-  const [favorites, setFavorites] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const favoritesResponse = await fetch('http://localhost:3001/favorites');
-        if (!favoritesResponse.ok) {
-          throw new Error('Failed to fetch favorites data');
-        }
-
-        const favoritesData = await favoritesResponse.json();
-        setFavorites(favoritesData.map(stock => stock.id)); 
-        console.log('Favorites received:', favoritesData);
-      } catch (error) {
-        console.error('Error fetching or parsing favorites data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { themeStyles } = useTheme();
+  // const [favorites, setFavorites] = useState([]);
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state);
   const deleteStockFromFavorites = async (symbolToDelete) => {
     try {
-   
-      const deleteResponse = await fetch(`http://localhost:3001/favorites/${symbolToDelete}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (deleteResponse.ok) {
-        console.log('Stock data deleted from favorites:', symbolToDelete);
-        setFavorites((prevFavorites) => prevFavorites.filter(symbol => symbol !== symbolToDelete));
-      } else {
-        console.error('Failed to delete stock data:', deleteResponse.statusText);
-      }
+      // Dispatch the action to remove favorite from Redux state
+      dispatch(removeFromFavorites(symbolToDelete));
     } catch (error) {
       console.error('Error deleting stock data from favorites:', error);
     }
@@ -59,19 +34,25 @@ const FavoritesList = () => {
   };
 
   return (
-    <div className="favorites-list-container">
-      <h2>Favorites List</h2>
-      <ul className="favorites-list">
-        {favorites.map((symbol) => (
-          <Favorites
-            key={symbol}
-            symbol={symbol}
-            onClick={() => handleFetchStockData(symbol)}
-            onDelete={() => deleteStockFromFavorites(symbol)}
-          />
-        ))}
-      </ul>
+    <div className='fav-entire' style={themeStyles}>
+      <div className="favorites-list-container ">
+        {favorites && favorites.length === 0 ? (
+          <p>No favorites found</p>
+        ) : (
+          <ul className="favorites-list">
+            {favorites.map((symbol) => (
+              <Favorites
+                key={symbol.symbol}
+                symbol={symbol.symbol}
+                onClick={() => handleFetchStockData(symbol.symbol)}
+                onDelete={() => deleteStockFromFavorites(symbol.symbol)}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
+
   );
 };
 
