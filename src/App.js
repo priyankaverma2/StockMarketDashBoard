@@ -12,7 +12,8 @@ import { ThemeProvider } from './components/ThemeContext';
 import FavoritesList from './components/Dashboard/FavoritesList';
 
 const App = () => {
- 
+  const api_key=process.env.REACT_APP_STOCK_API_KEY;
+  console.log(api_key);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const handleLogin = () => {
     setLoggedIn(true);

@@ -1,4 +1,4 @@
-const API_KEY = 'pk_fff3c5403d6742bfb249dbf6295d5fa7'; // Replace with API key
+const API_KEY = process.env.REACT_APP_STOCK_API_KEY; 
 
 const getStockSymbols = async () => {
   try {

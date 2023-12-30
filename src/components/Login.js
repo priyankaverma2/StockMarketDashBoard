@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = () => {
     
-  if (username==='a'&& password==='a') {
+  if (username==='priyanka'&& password==='priyanka') {
     onLogin();
     navigate('/dashboard');
   } else {
